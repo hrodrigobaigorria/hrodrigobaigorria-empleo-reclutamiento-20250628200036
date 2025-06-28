@@ -1,6 +1,7 @@
 import React from 'react';
+import Footer from '../components/Footer';
 
-function LandingPage() {
+const HomePage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white-lilac via-white to-white p-6 flex flex-col">
       <header className="sticky top-0 bg-white backdrop-blur-md bg-opacity-70 shadow-md z-50">
@@ -311,6 +312,6 @@ function LandingPage() {
       </footer>
     </div>
   );
-}
+};
 
-export default LandingPage;
+export default HomePage;
