@@ -3,7 +3,6 @@ import React from 'react';
 function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white-lilac via-white to-white p-6 flex flex-col">
-      {/* Header / Navigation */}
       <header className="sticky top-0 bg-white backdrop-blur-md bg-opacity-70 shadow-md z-50">
         <nav className="max-w-7xl mx-auto flex items-center justify-between p-4">
           <div className="text-2xl font-bold text-tyrian-purple">HR Agency</div>
@@ -15,11 +14,9 @@ function LandingPage() {
             <li><a href="#testimonials" className="hover:text-fuchsia transition">Testimonials</a></li>
             <li><a href="#contact" className="hover:text-fuchsia transition">Contact</a></li>
           </ul>
-          {/* Mobile Hamburger Menu could be added here in future */}
         </nav>
       </header>
 
-      {/* Hero Section */}
       <section
         id="home"
         className="flex flex-col-reverse md:flex-row items-center max-w-7xl mx-auto my-12 md:my-24 gap-12"
@@ -56,7 +53,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Services Section */}
       <section id="services" className="max-w-7xl mx-auto py-16 px-4">
         <h2 className="text-3xl font-bold text-center text-dark-blue mb-12">Our Services</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -133,7 +129,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
       <section id="stats" className="bg-gradient-to-r from-tyrian-purple to-fuchsia text-white py-16 px-4">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
           <div>
@@ -151,7 +146,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <section id="testimonials" className="max-w-7xl mx-auto py-16 px-4">
         <h2 className="text-3xl font-bold text-center text-dark-blue mb-12">What Our Clients Say</h2>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
@@ -193,7 +187,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Team Section */}
       <section id="team" className="max-w-7xl mx-auto py-16 px-4">
         <h2 className="text-3xl font-bold text-center text-dark-blue mb-12">Meet Our Team</h2>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
@@ -236,7 +229,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section id="contact" className="max-w-7xl mx-auto py-16 px-4">
         <h2 className="text-3xl font-bold text-center text-dark-blue mb-12">Get In Touch</h2>
         <form
@@ -301,7 +293,6 @@ function LandingPage() {
         </form>
       </section>
 
-      {/* Footer */}
       <footer className="bg-dark-blue text-white py-6 mt-auto">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-4">
           <p className="text-sm">© 2024 HR Agency. All rights reserved.</p>
