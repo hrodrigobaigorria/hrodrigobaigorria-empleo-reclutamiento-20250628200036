@@ -261,12 +261,12 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section id="contact" className="max-w-7xl mx-auto py-16 px-4">
+      <section id="contact" className="max-w-7xl mx-auto py-16 px-4 w-full">
         <h2 className="text-3xl font-bold text-center text-dark-blue mb-12">Get In Touch</h2>
-        <section className="max-w-6xl mx-auto mt-12 flex flex-col md:flex-row bg-card rounded-lg shadow-md overflow-hidden">
-          <div className="w-full md:w-1/2 p-8">
+        <section className="max-w-full mx-auto mt-12 flex flex-col md:flex-row bg-card rounded-lg shadow-md overflow-hidden w-full">
+          <div className="w-full p-8 md:w-1/2">
             <h3 className="text-3xl font-semibold mb-6 text-foreground">Contáctanos</h3>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-muted-foreground">
                   Nombre
@@ -277,6 +277,7 @@ const HomePage = () => {
                   placeholder="Tu nombre"
                   {...register('name')}
                   aria-invalid={errors.name ? 'true' : 'false'}
+                  className="w-full"
                 />
                 {errors.name && (
                   <p role="alert" className="mt-1 text-sm text-destructive">
@@ -294,6 +295,7 @@ const HomePage = () => {
                   placeholder="correo@ejemplo.com"
                   {...register('email')}
                   aria-invalid={errors.email ? 'true' : 'false'}
+                  className="w-full"
                 />
                 {errors.email && (
                   <p role="alert" className="mt-1 text-sm text-destructive">
@@ -311,6 +313,7 @@ const HomePage = () => {
                   {...register('message')}
                   aria-invalid={errors.message ? 'true' : 'false'}
                   rows={5}
+                  className="w-full"
                 />
                 {errors.message && (
                   <p role="alert" className="mt-1 text-sm text-destructive">
