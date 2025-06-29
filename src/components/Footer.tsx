@@ -15,17 +15,23 @@ const navLinks = [
   { to: '/contact', label: 'Contact' }
 ];
 
+const companyInfo = {
+  name: 'Nombre de la Empresa S.A.',
+  address: 'Calle Falsa 123, Ciudad, País',
+  phone: '+52 123 456 7890',
+  email: 'contacto@empresa.com'
+};
+
 const Footer = () => {
   return (
     <footer style={{ backgroundColor: '#111111', color: '#eee', padding: '2rem 1rem', textAlign: 'center' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ flex: '1 1 200px', marginBottom: '1rem' }}>
-          <h3>Contact Us</h3>
-          <address style={{ fontStyle: 'normal', lineHeight: 1.5 }}>
-            123 Main Street<br />
-            City, State 12345<br />
-            Phone: (123) 456-7890<br />
-            Email: info@example.com
+        <div style={{ flex: '1 1 200px', marginBottom: '1rem', textAlign: 'left' }}>
+          <h3>{companyInfo.name}</h3>
+          <address style={{ fontStyle: 'normal', lineHeight: 1.5, marginTop: '0.5rem' }}>
+            {companyInfo.address}<br />
+            Teléfono: <a href={`tel:${companyInfo.phone.replace(/\s+/g, '')}`} style={{ color: '#eee', textDecoration: 'underline' }}>{companyInfo.phone}</a><br />
+            Email: <a href={`mailto:${companyInfo.email}`} style={{ color: '#eee', textDecoration: 'underline' }}>{companyInfo.email}</a>
           </address>
         </div>
         <nav style={{ flex: '1 1 200px', marginBottom: '1rem' }} aria-label="Footer navigation">
@@ -50,7 +56,7 @@ const Footer = () => {
         </div>
       </div>
       <div style={{ marginTop: '1rem', fontSize: '0.875rem', color: '#aaa' }}>
-        &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+        &copy; {new Date().getFullYear()} {companyInfo.name}. All rights reserved.
       </div>
     </footer>
   );
