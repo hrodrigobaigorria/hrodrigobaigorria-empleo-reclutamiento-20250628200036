@@ -1,4 +1,3 @@
-import Footer from '@/components/Footer';
 import React from 'react';
 import Footer from '../components/Footer';
 
@@ -295,25 +294,9 @@ const HomePage = () => {
         </form>
       </section>
 
-      <footer className="bg-dark-blue text-white py-6 mt-auto">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-4">
-          <p className="text-sm">© 2024 HR Agency. All rights reserved.</p>
-          <nav className="space-x-4 mt-4 md:mt-0">
-            <a href="#home" className="hover:text-fuchsia transition">
-              Home
-            </a>
-            <a href="#services" className="hover:text-fuchsia transition">
-              Services
-            </a>
-            <a href="#contact" className="hover:text-fuchsia transition">
-              Contact
-            </a>
-          </nav>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
-
 
 export default HomePage;
