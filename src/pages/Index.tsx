@@ -1,7 +1,38 @@
 import React from 'react';
 import Footer from '../components/Footer';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Input } from '../components/ui/input';
+import { Textarea } from '../components/ui/textarea';
+import { Button } from '../components/ui/button';
+import { useToast } from '../hooks/use-toast';
+
+const schema = z.object({
+  name: z.string().min(2, 'El nombre es obligatorio'),
+  email: z.string().email('Correo inválido'),
+  message: z.string().min(10, 'El mensaje debe tener al menos 10 caracteres')
+});
 
 const HomePage = () => {
+  const { toast } = useToast();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset
+  } = useForm({
+    resolver: zodResolver(schema)
+  });
+
+  const onSubmit = (data: z.infer<typeof schema>) => {
+    toast({
+      title: 'Formulario enviado',
+      description: 'Gracias por contactarnos. Te responderemos pronto.'
+    });
+    reset();
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white-lilac via-white to-white p-6 flex flex-col">
       <header className="sticky top-0 bg-white backdrop-blur-md bg-opacity-70 shadow-md z-50">
@@ -77,7 +108,7 @@ const HomePage = () => {
                   <path d="M9 4a4 4 0 0 1 8 0v16" />
                   <path d="M9 14h4" />
                 </svg>
-              ),
+              )
             },
             {
               title: 'Consulting & Strategy',
@@ -96,7 +127,7 @@ const HomePage = () => {
                   <circle cx="12" cy="12" r="10" />
                   <path d="M12 6v6l4 2" />
                 </svg>
-              ),
+              )
             },
             {
               title: 'Training & Development',
@@ -115,8 +146,8 @@ const HomePage = () => {
                   <path d="M4 4v16h16" />
                   <path d="M4 9h16m-8 4h8m-8 4h8" />
                 </svg>
-              ),
-            },
+              )
+            }
           ].map(({ title, description, icon }) => (
             <article
               key={title}
@@ -211,7 +242,7 @@ const HomePage = () => {
               name: 'Michael Chen',
               role: 'Training Specialist',
               photo: 'https://randomuser.me/api/portraits/men/48.jpg'
-            },
+            }
           ].map(({ name, role, photo }) => (
             <div
               key={name}
@@ -232,66 +263,87 @@ const HomePage = () => {
 
       <section id="contact" className="max-w-7xl mx-auto py-16 px-4">
         <h2 className="text-3xl font-bold text-center text-dark-blue mb-12">Get In Touch</h2>
-        <form
-          action="#"
-          className="max-w-xl mx-auto bg-white-lilac rounded-xl p-8 shadow-md"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <div className="mb-6">
-            <label
-              htmlFor="name"
-              className="block text-dark-blue font-semibold mb-2"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              className="w-full rounded-md border border-dark-blue/30 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-tyrian-purple"
-              placeholder="Your full name"
-            />
+        <section className="max-w-6xl mx-auto mt-12 flex flex-col md:flex-row bg-card rounded-lg shadow-md overflow-hidden">
+          <div className="w-full md:w-1/2 p-8">
+            <h3 className="text-3xl font-semibold mb-6 text-foreground">Contáctanos</h3>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-muted-foreground">
+                  Nombre
+                </label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Tu nombre"
+                  {...register('name')}
+                  aria-invalid={errors.name ? 'true' : 'false'}
+                />
+                {errors.name && (
+                  <p role="alert" className="mt-1 text-sm text-destructive">
+                    {errors.name.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-muted-foreground">
+                  Correo electrónico
+                </label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="correo@ejemplo.com"
+                  {...register('email')}
+                  aria-invalid={errors.email ? 'true' : 'false'}
+                />
+                {errors.email && (
+                  <p role="alert" className="mt-1 text-sm text-destructive">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-muted-foreground">
+                  Mensaje
+                </label>
+                <Textarea
+                  id="message"
+                  placeholder="Escribe tu mensaje aquí..."
+                  {...register('message')}
+                  aria-invalid={errors.message ? 'true' : 'false'}
+                  rows={5}
+                />
+                {errors.message && (
+                  <p role="alert" className="mt-1 text-sm text-destructive">
+                    {errors.message.message}
+                  </p>
+                )}
+              </div>
+              <Button type="submit" disabled={isSubmitting} className="w-full">
+                Enviar
+              </Button>
+            </form>
           </div>
-          <div className="mb-6">
-            <label
-              htmlFor="email"
-              className="block text-dark-blue font-semibold mb-2"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              className="w-full rounded-md border border-dark-blue/30 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-tyrian-purple"
-              placeholder="your.email@example.com"
-            />
+          <div className="w-full md:w-1/2 bg-gradient-to-tr from-primary/80 via-primary to-secondary/80 text-primary-foreground flex flex-col justify-center p-10">
+            <h3 className="text-2xl font-semibold mb-6">Información de Contacto</h3>
+            <div className="space-y-4 text-lg leading-relaxed">
+              <p>
+                <strong>Correo:</strong>{' '}
+                <a href="mailto:contacto@agencia.com" className="underline hover:text-primary-foreground/90">
+                  contacto@agencia.com
+                </a>
+              </p>
+              <p>
+                <strong>Dirección:</strong> Av. Principal 123, Ciudad, País
+              </p>
+              <p>
+                <strong>Teléfono:</strong>{' '}
+                <a href="tel:+1234567890" className="underline hover:text-primary-foreground/90">
+                  +1 234 567 890
+                </a>
+              </p>
+            </div>
           </div>
-          <div className="mb-6">
-            <label
-              htmlFor="message"
-              className="block text-dark-blue font-semibold mb-2"
-            >
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              required
-              className="w-full rounded-md border border-dark-blue/30 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-tyrian-purple"
-              placeholder="Write your message here..."
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-tyrian-purple text-white font-semibold py-3 rounded-lg hover:bg-fuchsia transition"
-          >
-            Send Message
-          </button>
-        </form>
+        </section>
       </section>
 
       <Footer />
